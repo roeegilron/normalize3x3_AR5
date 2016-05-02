@@ -3,7 +3,7 @@ function MAIN()
 startup_code()
 params = getparams();
 %% run normazlize again to save files at 3x3 resolution instead of 2x2 to make AR processing faster 
-
+run_normalize()
 %% run AR5 preprocessing 
 
 %% flaten data set 
