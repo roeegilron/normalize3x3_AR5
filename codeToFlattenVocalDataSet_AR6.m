@@ -3,23 +3,20 @@ clc
 startup_code()
 params = getparams();
 
+dirStatsReasults = params.datafold; 
+resultsdir = fullfile(params.datafold,'stats_normalized_sep_beta_FIR_ar6');
+mkdir(resultsdir); 
 
-path2add = genpath('/home/rack-hezi-03/home/roigilro/dataForAnalysis/PoldrackRFX_Ttest/NeuroElf_v10_5153');
-addpath(path2add);
-dirStatsReasults = '/home/hezi/roee/vocalDataSet/extractedDataVocalDataSet/';
-statsResultsFodlers = ...
-    {'stats','stats_normalized_only','stats_normalized_sep_beta','stats_smoothed_sep_beta'};
-matFilesDir = '/home/rack-hezi-01/home/roigilro/data/vocal_data_set/';
 
 %% loop on subjects
 load(fullfile(...
-    matFilesDir,'groupMaskFromRFXvocalDataSet.mat'))
+    pwd,'groupMaskFromRFXvocalDataSet.mat'))
 
 n =  neuroelf;
 subFolders = findFilesBVQX(dirStatsReasults,'sub*',struct('dirs',1,'depth',1));
 cnt =1;
 for i = 1:length(subFolders)
-    findar3fold = findFilesBVQX(subFolders{i},'stats_normalized_sep_beta_FIR_ar3',...
+    findar3fold = findFilesBVQX(subFolders{i},'stats_noramalized_sep_beta_FIR_ar6',...
         struct('dirs',1));
 if ~isempty(findar3fold)
     if exist(fullfile(findar3fold{1},'Cbeta_0040.nii'),'file')
@@ -46,7 +43,7 @@ if ~isempty(findar3fold)
                 labels(k) = 2;
             end
         end
-        matFileToSave = fullfile(dirStatsReasults,'stats_normalized_sep_beta_FIR_ar3',...
+        matFileToSave = fullfile(resultsdir,...
             ['data_' subStr{1} '.mat']);
         save(matFileToSave,'data','locations','mask','labels','rawLabel');
         fprintf('%d. %s done in %f\n',cnt,subStr{1},toc(start));
