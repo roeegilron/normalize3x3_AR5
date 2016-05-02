@@ -1,4 +1,4 @@
-function run_normalize3x3()
+function run_AR6()
 %% startup code
 startup_code()
 params = getparams();
@@ -12,9 +12,9 @@ startmatlab = 'matlabr2015a -nodisplay -nojvm -singleCompThread -r '; % matlab v
 for i = 1:length(subsToRun)
     subnum = subsToRun(i);
     if ispc
-        run_normalize_job(subnum)
+        run_AR6_job(subnum)
     else
-        runprogram  = sprintf('"run run_normalize_job(%d); exit;" ',subnum);
+        runprogram  = sprintf('"run run_AR6_job(%d); exit;" ',subnum);
         pause(0.1);
         unix([startmatlab  runprogram ' &'])
     end
