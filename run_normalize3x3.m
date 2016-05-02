@@ -14,7 +14,7 @@ for i = 1:length(subsToRun)
     if ispc
         run_normalize_job(subnum)
     else
-        runprogram  = sprintf('"run MAIN_doSearchLightCrossValFolds_Ht2_NewT2013_anatomical(%d); exit;" ',subnum);
+        runprogram  = sprintf('"run run_normalize_job(%d); exit;" ',subnum);
         pause(0.1);
         unix([startmatlab  runprogram ' &'])
     end
