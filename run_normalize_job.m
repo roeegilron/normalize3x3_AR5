@@ -14,6 +14,7 @@ ff = findFilesBVQX(reaalignfold,'as*.nii');
 matlabbatch{1}.spm.spatial.normalise.write.subj.resample = ff;
 matlabbatch{1}.spm.spatial.normalise.write.woptions.vox = [3 3 3 ]; 
 save(fullfile(params.datafold,subdirname,'normalizejob3x3job.mat')); 
+spm_jobman('initcfg');
 spm_jobman('run', fullfile(params.datafold,subdirname,'normalizejob3x3job.mat'));
 
 %% move normalized files to seperate folder 
